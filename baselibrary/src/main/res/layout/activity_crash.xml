@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_16">
+
+            <ImageView
+                android:id="@+id/customactivityoncrash_error_activity_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/icon_warn" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:gravity="center"
+                android:text="应用崩溃，请选择操作"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/customactivityoncrash_error_activity_restart_button"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_marginEnd="@dimen/dp_50"
+                android:layout_marginStart="@dimen/dp_50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_30"
+                android:background="@drawable/btn_blue_complete_s"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:text="重新启动应用" />
+
+
+            <Button
+                android:id="@+id/customactivityoncrash_error_activity_more_info_button"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_marginEnd="@dimen/dp_50"
+                android:layout_marginStart="@dimen/dp_50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@drawable/btn_blue_complete_s"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:text="查看错误日志" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
