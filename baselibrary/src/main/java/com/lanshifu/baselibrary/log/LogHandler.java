@@ -1,12 +1,13 @@
 package com.lanshifu.baselibrary.log;
 
 
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
 
-import com.lanshifu.baselibrary.MainApplication;
+import com.lanshifu.baselibrary.BaseApplication;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,12 +26,15 @@ public class LogHandler extends Thread {
 
     private BufferedWriter bufWriter = null;
 
-    public LogHandler() {
-        init();
+    private static Context mContext;
+
+    public LogHandler(Context context) {
+        init(context);
     }
 
-    private void init() {
+    private void init(Context context) {
         queue = new LinkedBlockingQueue<LogObj>(2000);
+        mContext = context;
     }
 
     public boolean getRunning() {
@@ -107,9 +111,9 @@ public class LogHandler extends Thread {
                         if (file == null || file.getAbsolutePath().indexOf(needWriteFiel) < 0) {
                             file = new File(LogHelper.MYLOG_PATH_SDCARD_DIR, obj.getFilename()
                                     + "_" + needWriteFiel + ".log");
-                            PackageManager packageManager = MainApplication.getContext()
+                            PackageManager packageManager = BaseApplication.getContext()
                                     .getPackageManager();
-                            PackageInfo info = packageManager.getPackageInfo(MainApplication
+                            PackageInfo info = packageManager.getPackageInfo(BaseApplication
                                     .getContext().getPackageName(), 0);
                             needWriteMessage = "excomm_log  " + info.versionName + "\r\n"
                                     + needWriteMessage;

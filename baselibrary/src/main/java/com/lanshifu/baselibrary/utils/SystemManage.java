@@ -29,9 +29,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-
-import com.lanshifu.baselibrary.MainApplication;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -735,8 +732,8 @@ public final class SystemManage {
      * @param name      资源名称
      * @param defaulRes 默认返回资源
      */
-    public static int getIdentifierDrawable(String name, int defaulRes) {
-        return getIdentifier(MainApplication.getContext(), name, "drawable", defaulRes);
+    public static int getIdentifierDrawable(Context context,String name, int defaulRes) {
+        return getIdentifier(context, name, "drawable", defaulRes);
     }
 
     /**
@@ -744,15 +741,15 @@ public final class SystemManage {
      *
      * @param name 资源名称
      */
-    public static int getIdentifierDrawable(String name) {
-        return getIdentifierDrawable(name, 0);
+    public static int getIdentifierDrawable(Context context,String name) {
+        return getIdentifierDrawable(context, name, 0);
     }
 
     /**
      * 获取屏幕材质信息
      */
-    public static DisplayMetrics getDisplayMetrics() {
-        return MainApplication.getContext().getResources().getDisplayMetrics();
+    public static DisplayMetrics getDisplayMetrics(Context context) {
+        return context.getResources().getDisplayMetrics();
     }
 
     /**
@@ -831,10 +828,10 @@ public final class SystemManage {
     /**
      * 校验生产包签名的证书md5
      */
-    public static boolean isValidMd5() {
+    public static boolean isValidMd5(Context context) {
 
-        String packageName = MainApplication.getContext().getPackageName();
-        PackageManager pm = MainApplication.getContext().getPackageManager();
+        String packageName = context.getPackageName();
+        PackageManager pm = context.getPackageManager();
         PackageInfo pi;
         String md5 = "";
         try {

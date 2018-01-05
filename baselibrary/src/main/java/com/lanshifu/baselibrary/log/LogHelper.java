@@ -1,6 +1,7 @@
 
 package com.lanshifu.baselibrary.log;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.lanshifu.baselibrary.utils.StorageUtil;
@@ -18,9 +19,9 @@ public final class LogHelper implements ILogger {
     public static boolean mIsDebugMode = true;
     private static Boolean MYLOG_WRITE_TO_FILE = true;
 
-    private static String TAG = "GTGJ";
+    private static String TAG = "myapp3";
     private static int logLevel = Log.VERBOSE;
-    private static String MYLOGFILEName = "GTGJ";
+    private static String MYLOGFILEName = "myapp3";
 
     private static final String CLASS_METHOD_LINE_FORMAT = "[%d] [%s.%s:%d] %s";
 
@@ -31,6 +32,7 @@ public final class LogHelper implements ILogger {
     private static SimpleDateFormat bakLogSdf = new SimpleDateFormat("yyyy-MM-dd-HHmmss");
     private static int logFileBackupNumber = 1;
     private static int logFileBackupSize = 50;
+
 
     public static void trace(String str) {
         log(str, Log.DEBUG);

@@ -1,9 +1,8 @@
 
 package com.lanshifu.baselibrary.utils;
 
+import android.content.Context;
 import android.content.res.Resources;
-
-import com.lanshifu.baselibrary.MainApplication;
 
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
@@ -319,8 +318,8 @@ public final class StringUtil {
      * @param dictName 字典id
      * @return String 如果找到相应的字典组和字典,返回相应的字典名称,否则返回空字符串
      */
-    public static String getDictId(String groupid, String dictName) {
-        List<Dictitem> dictitems = StringUtil.getDictitems(groupid);
+    public static String getDictId(Context context,String groupid, String dictName) {
+        List<Dictitem> dictitems = StringUtil.getDictitems(context,groupid);
         for (Dictitem dictitem : dictitems) {
             if (dictitem.getDictname().equals(dictName)) {
                 return dictitem.getDictid();
@@ -336,8 +335,8 @@ public final class StringUtil {
      * @param dictid  字典id
      * @return String 如果找到相应的字典组和字典,返回相应的字典名称,否则返回空字符串
      */
-    public static String getDictName(String groupid, String dictid) {
-        List<Dictitem> dictitems = StringUtil.getDictitems(groupid);
+    public static String getDictName(Context context,String groupid, String dictid) {
+        List<Dictitem> dictitems = StringUtil.getDictitems(context,groupid);
         for (Dictitem dictitem : dictitems) {
             if (dictitem.getDictid().equals(dictid)) {
                 return dictitem.getDictname();
@@ -352,10 +351,10 @@ public final class StringUtil {
      * @param groupid 字典组id
      * @return List<Dictitem> 如果找到对应的字典组则返回,否则返回空列表
      */
-    public static List<Dictitem> getDictitems(String groupid) {
+    public static List<Dictitem> getDictitems(Context context,String groupid) {
         List<Dictitem> dictitems = new ArrayList<Dictitem>();
-        Resources res = MainApplication.getContext().getResources();
-        int id = res.getIdentifier("dict_" + groupid, "array", MainApplication.getContext()
+        Resources res = context.getResources();
+        int id = res.getIdentifier("dict_" + groupid, "array", context
                 .getPackageName());
         if (id <= 0) {
             return dictitems;

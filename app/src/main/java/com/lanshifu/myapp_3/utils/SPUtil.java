@@ -1,10 +1,11 @@
-package com.lanshifu.baselibrary.utils;
+package com.lanshifu.myapp_3.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.lanshifu.baselibrary.MainApplication;
 import com.lanshifu.baselibrary.encrypt.DESedeEncrypt;
+import com.lanshifu.baselibrary.utils.StringUtil;
+import com.lanshifu.myapp_3.MainApplication;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -24,9 +25,9 @@ public class SPUtil {
     private static final String PRES_NAME = "system_share";
 
 
-    private SharedPreferences mSharePres;
+    private static SharedPreferences mSharePres;
 
-    private DESedeEncrypt dESedeEncrypt;
+    private static DESedeEncrypt dESedeEncrypt;
 
     /**
      * <默认构造函数>
@@ -39,7 +40,6 @@ public class SPUtil {
     }
 
     private static class SysSharePresHolder {
-
         static final SPUtil INSTANCE = new SPUtil();
     }
 

@@ -1,11 +1,10 @@
 package com.lanshifu.myapp_3.network;
 
-import android.text.TextUtils;
-
-import com.lanshifu.baselibrary.MainApplication;
+import com.lanshifu.baselibrary.BaseApplication;
 import com.lanshifu.baselibrary.log.LogHelper;
 import com.lanshifu.baselibrary.utils.SystemUtil;
 import com.lanshifu.myapp_3.Config;
+import com.lanshifu.myapp_3.MainApplication;
 import com.lanshifu.myapp_3.network.api.ApiConstant;
 import com.lanshifu.myapp_3.network.api.DefaultApi;
 import com.lanshifu.myapp_3.network.progress.ProgressManager;
@@ -76,7 +75,7 @@ public class RetrofitHelper {
 
         if (mDefaultOkHttpClient == null) {
             //设置Http缓存
-            Cache cache = new Cache(new File(MainApplication.getContext()
+            Cache cache = new Cache(new File(BaseApplication.getContext()
                     .getCacheDir(), "HttpCache"), 1024 * 1024 * 10);
 
 //            mDefaultOkHttpClient = new OkHttpClient.Builder()
@@ -134,7 +133,7 @@ public class RetrofitHelper {
             // 无网络时，设置超时为1天
             int maxStale = 60 * 60 * 24;
             Request request = chain.request();
-            if (SystemUtil.isNetworkAvailable()) {
+            if (SystemUtil.isNetworkAvailable(MainApplication.getContext())) {
                 //有网络时只从网络获取
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_NETWORK)
@@ -146,7 +145,7 @@ public class RetrofitHelper {
                         .build();
             }
             Response response = chain.proceed(request);
-            if (SystemUtil.isNetworkAvailable()) {
+            if (SystemUtil.isNetworkAvailable(MainApplication.getContext())) {
                 response = response.newBuilder()
                         .removeHeader("Pragma")
                         .header("Cache-Control", "public, max-age=" + maxAge)

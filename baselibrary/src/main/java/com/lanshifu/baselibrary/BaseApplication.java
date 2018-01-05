@@ -6,13 +6,17 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.lanshifu.baselibrary.base.AppManager;
+import com.lanshifu.baselibrary.log.LogHandler;
 import com.lanshifu.baselibrary.log.LogHelper;
+import com.lanshifu.baselibrary.utils.FileUtil;
+import com.lanshifu.baselibrary.utils.StorageUtil;
+import com.lanshifu.baselibrary.utils.ToastUtil;
 
 /**
  * Created by lanxiaobin on 2018/1/2.
  */
 
-public class MainApplication extends Application {
+public class BaseApplication extends Application {
 
     private static Context context;
 
@@ -23,8 +27,14 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         context = getApplicationContext();
+
+        LogHandler logHandler = new LogHandler(this);
+        logHandler.setName("LogHandler");
+
+        ToastUtil.init(context);
+        StorageUtil.init(context);
+        FileUtil.init(context);
 
         //注册自己的Activity的生命周期回调接口。
         registerActivityLifecycleCallbacks(activityLifecycleCallbacks);

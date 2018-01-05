@@ -1,6 +1,7 @@
-package com.lanshifu.baselibrary.utils;
+package com.lanshifu.myapp_3.utils;
 
 
+import com.lanshifu.baselibrary.utils.StringUtil;
 
 /**
  * Author:  [xWX371834\许纯震].
@@ -8,17 +9,17 @@ package com.lanshifu.baselibrary.utils;
  * Description:
  *      保存数组进SharePreference中，用#来分隔，所以，你懂的
  */
-public class ArraySharePres {
+public class ArraySPUtil {
 
     public void cleanSPArray(String key) {
         SPUtil.getInstance().remove(key);
     }
 
     public static class SINGLETON{
-        public static ArraySharePres INSTANCE= new ArraySharePres();
+        public static ArraySPUtil INSTANCE= new ArraySPUtil();
     }
 
-    public static ArraySharePres getInstance(){
+    public static ArraySPUtil getInstance(){
         return SINGLETON.INSTANCE;
     }
 

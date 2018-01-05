@@ -113,7 +113,7 @@ public final class DefaultErrorActivity extends AppCompatActivity {
 
     }
     private void initLog() {
-        LogHandler logHandler = new LogHandler();
+        LogHandler logHandler = new LogHandler(this);
         logHandler.setName("LogHandler");
         logHandler.start();
         LogHelper.d("init log");

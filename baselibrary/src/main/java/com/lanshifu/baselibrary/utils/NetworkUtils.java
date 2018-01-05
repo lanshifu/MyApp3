@@ -4,8 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.lanshifu.baselibrary.MainApplication;
-
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.InputStream;
@@ -116,11 +114,11 @@ public class NetworkUtils {
         return mac_byte;
     }
 
-    public static String vendorFromMac(byte[] mac) {
+    public static String vendorFromMac(Context contexts,byte[] mac) {
         if (mVendors == null) {
             try {
                 mVendors = new HashMap<String, String>();
-                InputStream is = MainApplication.getContext().getAssets()
+                InputStream is = contexts.getAssets()
                         .open("nmap-mac-prefixes");
                 DataInputStream in = new DataInputStream(is);
                 BufferedReader reader = new BufferedReader(
@@ -147,9 +145,8 @@ public class NetworkUtils {
             return null;
     }
 
-    public static boolean isWifiConnected() {
-        ConnectivityManager manager = (ConnectivityManager) MainApplication
-                .getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isWifiConnected(Context context) {
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager
                 .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         return info != null && info.isConnected() && info.isAvailable();

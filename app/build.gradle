@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.didi.virtualapk.host'
 
 android {
 
@@ -47,4 +48,7 @@ dependencies {
 //    compile 'top.zibin:Luban:1.1.3'
 //    //PhotoView
 //    compile 'com.commit451:PhotoView:1.2.4'
+
+    //didi插件
+    compile 'com.didi.virtualapk:core:0.9.0'
 }

@@ -17,7 +17,6 @@ import android.telephony.SubscriptionManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-import com.lanshifu.baselibrary.MainApplication;
 import com.lanshifu.baselibrary.log.LogHelper;
 
 import java.io.BufferedReader;
@@ -256,8 +255,8 @@ public class SystemUtil {
         return 0;
     }
 
-    public static boolean isNetworkAvailable() {
-        ConnectivityManager connMgr = (ConnectivityManager) MainApplication.getContext()
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connMgr = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isConnected());

@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 
-import com.lanshifu.baselibrary.MainApplication;
-
 import java.util.Stack;
 
 /**
@@ -134,12 +132,10 @@ public class AppManager {
      *
      * @param isBackground 是否开开启后台运行
      */
-    public void AppExit(Boolean isBackground) {
+    public void AppExit(Context context, Boolean isBackground) {
         try {
-            Context context = MainApplication.getContext();
             finishAllActivity();
-            ActivityManager activityMgr = (ActivityManager) MainApplication.getContext()
-                    .getSystemService(Context.ACTIVITY_SERVICE);
+            ActivityManager activityMgr = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
             activityMgr.restartPackage(context.getPackageName());
         } catch (Exception e) {
 

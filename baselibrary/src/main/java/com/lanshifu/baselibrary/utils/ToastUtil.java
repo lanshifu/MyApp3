@@ -5,7 +5,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.lanshifu.baselibrary.MainApplication;
+import com.lanshifu.baselibrary.BaseApplication;
 import com.lanshifu.baselibrary.R;
 import com.lanshifu.baselibrary.widget.TopToast;
 
@@ -17,18 +17,24 @@ public class ToastUtil {
 
     private static Toast mToast;
 
+    private static Context mContext;
+
+    public static void init(Context context){
+        mContext = context;
+    }
+
 
     public static void showShortToast(int resId) {
-        showShortToast(MainApplication.getContext().getResources().getText(resId));
+        showShortToast(mContext.getResources().getText(resId));
     }
 
     public static void showShortToast(CharSequence hint) {
-        showToast(MainApplication.getContext(), hint, Toast.LENGTH_SHORT);
+        showToast(mContext, hint, Toast.LENGTH_SHORT);
 
     }
 
     public static void showLongToast(CharSequence hint) {
-        showToast(MainApplication.getContext(), hint, Toast.LENGTH_LONG);
+        showToast(mContext, hint, Toast.LENGTH_LONG);
 
     }
 

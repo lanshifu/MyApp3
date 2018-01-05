@@ -8,9 +8,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
-import com.lanshifu.baselibrary.MainApplication;
-import com.lanshifu.baselibrary.log.LogHelper;
-
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -41,17 +38,22 @@ public final class FileUtil {
 
     public static final double BYTES_PER_M = 1024.0 * 1024.0;
 
-    public static final String DATABASE_FOLDER_NAME = Environment.getDataDirectory() + "/data/"
-            + MainApplication.getContext().getPackageName() + "/databases/";
+    private static Context mContext;
 
-    public static final String SHAREPRE_CACHE_NAME = Environment.getDataDirectory() + "/data/"
-            + MainApplication.getContext().getPackageName() + "/cache/";
-
+    public static String SHAREPRE_CACHE_NAME;
     /**
      * sd卡的根目录
      */
-    public static final String FILE_ROOT = Environment.getExternalStorageDirectory() + "/aa_lanshifu/"
-            + getSimplePackage() + "/";
+    public static String FILE_ROOT;
+
+    public static void init(Context context){
+        mContext = context;
+        SHAREPRE_CACHE_NAME = Environment.getDataDirectory() + "/data/"
+                + mContext.getPackageName() + "/cache/";
+        FILE_ROOT = Environment.getExternalStorageDirectory() + "/aa_lanshifu/"
+                + getSimplePackage(mContext) + "/";
+    }
+
 
     /**
      * 这个实现完全固定了文件名,而不是根据当前时间来生成
@@ -93,8 +95,8 @@ public final class FileUtil {
      *
      * @return 包名的最后一个字段
      */
-    public static String getSimplePackage() {
-        String packageName = MainApplication.getContext().getPackageName();
+    public static String getSimplePackage(Context context) {
+        String packageName = context.getPackageName();
         int idx = packageName.lastIndexOf(".");
         return idx == -1 ? packageName : packageName.substring(idx + 1);
     }
@@ -542,7 +544,7 @@ public final class FileUtil {
      */
     public static String getAssets(String fileName) {
 
-        return stream2String(getAssetsInputStream(MainApplication.getContext(), fileName));
+        return stream2String(getAssetsInputStream(mContext, fileName));
 
     }
 

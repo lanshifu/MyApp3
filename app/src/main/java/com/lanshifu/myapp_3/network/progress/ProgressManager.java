@@ -8,7 +8,6 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.text.TextUtils;
 
-
 import com.lanshifu.myapp_3.network.progress.body.ProgressRequestBody;
 import com.lanshifu.myapp_3.network.progress.body.ProgressResponseBody;
 

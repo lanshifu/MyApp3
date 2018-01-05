@@ -4,8 +4,6 @@ import android.content.Context;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-
-import com.lanshifu.baselibrary.MainApplication;
 import com.lanshifu.baselibrary.log.LogHelper;
 
 import java.lang.reflect.Field;
@@ -26,9 +24,9 @@ public class ImsiUtil {
 
 
 
-    public boolean contentIMSI() {
+    public boolean contentIMSI(Context context) {
         boolean flag = false;
-        IMSInfo imsInfo = getIMSInfo();
+        IMSInfo imsInfo = getIMSInfo(context);
         if (imsInfo != null) {
             if (!TextUtils.isEmpty(imsInfo.getImsi_1())) {
                 flag = true;
@@ -52,24 +50,24 @@ public class ImsiUtil {
      *
      * @return
      */
-    public static IMSInfo getIMSInfo() {
-        IMSInfo imsInfo = initQualcommDoubleSim();
+    public static IMSInfo getIMSInfo(Context context) {
+        IMSInfo imsInfo = initQualcommDoubleSim(context);
         if (imsInfo != null) {
             return imsInfo;
         } else {
-            imsInfo = initMtkDoubleSim();
+            imsInfo = initMtkDoubleSim(context);
             if (imsInfo != null) {
                 return imsInfo;
             } else {
-                imsInfo = initMtkSecondDoubleSim();
+                imsInfo = initMtkSecondDoubleSim(context);
                 if (imsInfo != null) {
                     return imsInfo;
                 } else {
-                    imsInfo = initSpreadDoubleSim();
+                    imsInfo = initSpreadDoubleSim(context);
                     if (imsInfo != null) {
                         return imsInfo;
                     } else {
-                        imsInfo = getIMSI();
+                        imsInfo = getIMSI(context);
                         if (imsInfo != null) {
                             return imsInfo;
                         } else {
@@ -87,11 +85,12 @@ public class ImsiUtil {
      * MTK的芯片的判断
      *
      * @return
+     * @param context
      */
-    private static  IMSInfo initMtkDoubleSim() {
+    private static  IMSInfo initMtkDoubleSim(Context context) {
         IMSInfo imsInfo = null;
         try {
-            TelephonyManager tm = (TelephonyManager) MainApplication.getContext()
+            TelephonyManager tm = (TelephonyManager) context
                     .getSystemService(Context.TELEPHONY_SERVICE);
             Class<?> c = Class.forName("com.android.internal.telephony.Phone");
             Field fields1 = c.getField("GEMINI_SIM_1");
@@ -129,10 +128,10 @@ public class ImsiUtil {
      *
      * @return
      */
-    private static IMSInfo initMtkSecondDoubleSim() {
+    private static IMSInfo initMtkSecondDoubleSim(Context context) {
         IMSInfo imsInfo = null;
         try {
-            TelephonyManager tm = (TelephonyManager) MainApplication.getContext()
+            TelephonyManager tm = (TelephonyManager) context
                     .getSystemService(Context.TELEPHONY_SERVICE);
             Class<?> c = Class.forName("com.android.internal.telephony.Phone");
             Field fields1 = c.getField("GEMINI_SIM_1");
@@ -171,8 +170,9 @@ public class ImsiUtil {
      * 展讯芯片的判断
      *
      * @return
+     * @param context
      */
-    private static IMSInfo initSpreadDoubleSim() {
+    private static IMSInfo initSpreadDoubleSim(Context context) {
         IMSInfo imsInfo = null;
         try {
             Class<?> c = Class
@@ -180,11 +180,11 @@ public class ImsiUtil {
             Method m = c.getMethod("getServiceName", String.class, int.class);
             String spreadTmService = (String) m.invoke(c,
                     Context.TELEPHONY_SERVICE, 1);
-            TelephonyManager tm = (TelephonyManager) MainApplication.getContext()
+            TelephonyManager tm = (TelephonyManager) context
                     .getSystemService(Context.TELEPHONY_SERVICE);
             imsi_1 = tm.getSubscriberId();
             imei_1 = tm.getDeviceId();
-            TelephonyManager tm1 = (TelephonyManager) MainApplication.getContext()
+            TelephonyManager tm1 = (TelephonyManager) context
                     .getSystemService(spreadTmService);
             imsi_2 = tm1.getSubscriberId();
             imei_2 = tm1.getDeviceId();
@@ -205,12 +205,13 @@ public class ImsiUtil {
      * 高通芯片判断
      *
      * @return
+     * @param context
      */
-    private static IMSInfo initQualcommDoubleSim() {
+    private static IMSInfo initQualcommDoubleSim(Context context) {
         IMSInfo imsInfo = null;
         try {
             Class<?> cx = Class.forName("android.telephony.MSimTelephonyManager");
-            Object obj = MainApplication.getContext().getSystemService("phone_msim");
+            Object obj = context.getSystemService("phone_msim");
             Method md = cx.getMethod("getDeviceId", int.class);
             Method ms = cx.getMethod("getSubscriberId", int.class);
             imei_1 = (String) md.invoke(obj, simId_1);
@@ -246,10 +247,10 @@ public class ImsiUtil {
      *
      * @return
      */
-    private static IMSInfo getIMSI() {
+    private static IMSInfo getIMSI(Context context) {
         IMSInfo imsInfo = null;
         try {
-            TelephonyManager tm = (TelephonyManager) MainApplication.getContext()
+            TelephonyManager tm = (TelephonyManager) context
                     .getSystemService(Context.TELEPHONY_SERVICE);
             imsi_1 = tm.getSubscriberId();
             imei_1 = tm.getDeviceId();

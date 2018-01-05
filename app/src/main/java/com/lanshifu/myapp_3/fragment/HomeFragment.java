@@ -10,7 +10,7 @@ import com.lanshifu.myapp_3.R;
 public class HomeFragment extends BaseFragment{
     @Override
     protected int getLayoutId() {
-        return R.layout.item_tab;
+        return R.layout.fragment_home;
     }
 
     @Override
