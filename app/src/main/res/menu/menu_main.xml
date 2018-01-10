@@ -5,6 +5,8 @@
     <item
         android:id="@+id/about"
         app:showAsAction="never"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_speaker_notes_black_24dp"
         android:title="关于"/>
 
     <item
@@ -15,8 +17,8 @@
     <item
         android:id="@+id/action_setting"
         android:orderInCategory="100"
-        android:tint="@android:color/white"
         android:title="设置"
-        app:showAsAction="ifRoom"/>
+        app:actionLayout="@layout/menu_action_album_edit"
+        app:showAsAction="always"/>
 
 </menu>
