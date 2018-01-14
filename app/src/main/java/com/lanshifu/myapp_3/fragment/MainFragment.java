@@ -20,8 +20,8 @@ public class MainFragment extends BaseFragment {
     @Bind(R.id.tabLayout)
     TabLayout mTabLayout;
 
-    private Class[] fragments = new Class[]{HomeFragment.class, HomeFragment.class,
-            HomeFragment.class, HomeFragment.class};
+    private Class[] fragments = new Class[]{HomeFragment.class, DefaultFragment.class,
+            DefaultFragment.class, DefaultFragment.class};
 
     private String[] mTitles = new String[]{"主页", "周边", "更多", "我的"};
 
@@ -44,11 +44,11 @@ public class MainFragment extends BaseFragment {
                 if (position == 1) {
                     return new HomeFragment();
                 } else if (position == 2) {
-                    return new HomeFragment();
+                    return new DefaultFragment();
                 } else if (position == 3) {
-                    return new HomeFragment();
+                    return new DefaultFragment();
                 }
-                return new HomeFragment();
+                return new DefaultFragment();
             }
 
             @Override

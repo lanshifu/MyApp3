@@ -19,9 +19,9 @@ public final class LogHelper implements ILogger {
     public static boolean mIsDebugMode = true;
     private static Boolean MYLOG_WRITE_TO_FILE = true;
 
-    private static String TAG = "myapp3";
+    private static String TAG = "lxb";
     private static int logLevel = Log.VERBOSE;
-    private static String MYLOGFILEName = "myapp3";
+    private static String MYLOGFILEName = "lxb";
 
     private static final String CLASS_METHOD_LINE_FORMAT = "[%d] [%s.%s:%d] %s";
 

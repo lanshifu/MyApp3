@@ -3,10 +3,13 @@ package com.lanshifu.baselibrary.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+
+import com.lanshifu.baselibrary.log.LogHelper;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -46,7 +49,7 @@ public final class FileUtil {
      */
     public static String FILE_ROOT;
 
-    public static void init(Context context){
+    public static void init(Context context) {
         mContext = context;
         SHAREPRE_CACHE_NAME = Environment.getDataDirectory() + "/data/"
                 + mContext.getPackageName() + "/cache/";
@@ -123,13 +126,14 @@ public final class FileUtil {
         return FileUriUtil.getPath(context, uri);
     }
 
-    public static boolean isDir(String filePath){
+    public static boolean isDir(String filePath) {
         File file = new File(filePath);
-        if(file.exists() && file.isDirectory()){
+        if (file.exists() && file.isDirectory()) {
             return true;
         }
         return false;
     }
+
     /**
      * 拷贝文件到某文件夹
      *
@@ -282,19 +286,19 @@ public final class FileUtil {
      * @return 文件MimeType
      */
     public static String getMIMEType(File file) {
-        String type="*/*";
+        String type = "*/*";
         String fName = file.getName();
         //获取后缀名前的分隔符"."在fName中的位置。
         int dotIndex = fName.lastIndexOf(".");
-        if(dotIndex < 0){
+        if (dotIndex < 0) {
             return type;
         }
         /* 获取文件的后缀名*/
-        String end=fName.substring(dotIndex,fName.length()).toLowerCase();
-        if(end=="")return type;
+        String end = fName.substring(dotIndex, fName.length()).toLowerCase();
+        if (end == "") return type;
         //在MIME和文件类型的匹配表中找到对应的MIME类型。
-        for(int i=0;i<MIME_MapTable.length;i++){ //MIME_MapTable??在这里你一定有疑问，这个MIME_MapTable是什么？
-            if(end.equals(MIME_MapTable[i][0]))
+        for (int i = 0; i < MIME_MapTable.length; i++) { //MIME_MapTable??在这里你一定有疑问，这个MIME_MapTable是什么？
+            if (end.equals(MIME_MapTable[i][0]))
                 type = MIME_MapTable[i][1];
         }
         return type;
@@ -302,68 +306,68 @@ public final class FileUtil {
 
     private static final String[][] MIME_MapTable = {
             // {后缀名，MIME类型}
-            { ".3gp", "video/3gpp" },
-            { ".apk", "application/vnd.android.package-archive" },
-            { ".asf", "video/x-ms-asf" },
-            { ".avi", "video/x-msvideo" },
-            { ".bin", "application/octet-stream" },
-            { ".bmp", "image/bmp" },
-            { ".c", "text/plain" },
-            { ".class", "application/octet-stream" },
-            { ".conf", "text/plain" },
-            { ".cpp", "text/plain" },
-            { ".doc", "application/msword" },
-            { ".docx",
-                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document" },
-            { ".xls", "application/vnd.ms-excel" },
-            { ".xlsx",
-                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" },
-            { ".exe", "application/octet-stream" },
-            { ".gif", "image/gif" },
-            { ".gtar", "application/x-gtar" },
-            { ".gz", "application/x-gzip" },
-            { ".h", "text/plain" },
-            { ".htm", "text/html" },
-            { ".html", "text/html" },
-            { ".jar", "application/java-archive" },
-            { ".java", "text/plain" },
-            { ".jpeg", "image/jpeg" },
-            { ".jpg", "image/jpeg" },
-            { ".js", "application/x-javascript" },
-            { ".log", "text/plain" },
-            { ".m3u", "audio/x-mpegurl" },
-            { ".m4a", "audio/mp4a-latm" },
-            { ".m4b", "audio/mp4a-latm" },
-            { ".m4p", "audio/mp4a-latm" },
-            { ".m4u", "video/vnd.mpegurl" },
-            { ".m4v", "video/x-m4v" },
-            { ".mov", "video/quicktime" },
-            { ".mp2", "audio/x-mpeg" },
-            { ".mp3", "audio/x-mpeg" },
-            { ".mp4", "video/mp4" },
-            { ".mpc", "application/vnd.mpohun.certificate" },
-            { ".mpe", "video/mpeg" },
-            { ".mpeg", "video/mpeg" },
-            { ".mpg", "video/mpeg" },
-            { ".mpg4", "video/mp4" },
-            { ".mpga", "audio/mpeg" },
-            { ".msg", "application/vnd.ms-outlook" },
-            { ".ogg", "audio/ogg" },
-            { ".pdf", "application/pdf" },
-            { ".png", "image/png" },
-            { ".pps", "application/vnd.ms-powerpoint" },
-            { ".ppt", "application/vnd.ms-powerpoint" },
-            { ".pptx",
-                    "application/vnd.openxmlformats-officedocument.presentationml.presentation" },
-            { ".prop", "text/plain" }, { ".rc", "text/plain" },
-            { ".rmvb", "audio/x-pn-realaudio" }, { ".rtf", "application/rtf" },
-            { ".sh", "text/plain" }, { ".tar", "application/x-tar" },
-            { ".tgz", "application/x-compressed" }, { ".txt", "text/plain" },
-            { ".wav", "audio/x-wav" }, { ".wma", "audio/x-ms-wma" },
-            { ".wmv", "audio/x-ms-wmv" },
-            { ".wps", "application/vnd.ms-works" }, { ".xml", "text/plain" },
-            { ".z", "application/x-compress" },
-            { ".zip", "application/x-zip-compressed" }, { "", "*/*" } };
+            {".3gp", "video/3gpp"},
+            {".apk", "application/vnd.android.package-archive"},
+            {".asf", "video/x-ms-asf"},
+            {".avi", "video/x-msvideo"},
+            {".bin", "application/octet-stream"},
+            {".bmp", "image/bmp"},
+            {".c", "text/plain"},
+            {".class", "application/octet-stream"},
+            {".conf", "text/plain"},
+            {".cpp", "text/plain"},
+            {".doc", "application/msword"},
+            {".docx",
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"},
+            {".xls", "application/vnd.ms-excel"},
+            {".xlsx",
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"},
+            {".exe", "application/octet-stream"},
+            {".gif", "image/gif"},
+            {".gtar", "application/x-gtar"},
+            {".gz", "application/x-gzip"},
+            {".h", "text/plain"},
+            {".htm", "text/html"},
+            {".html", "text/html"},
+            {".jar", "application/java-archive"},
+            {".java", "text/plain"},
+            {".jpeg", "image/jpeg"},
+            {".jpg", "image/jpeg"},
+            {".js", "application/x-javascript"},
+            {".log", "text/plain"},
+            {".m3u", "audio/x-mpegurl"},
+            {".m4a", "audio/mp4a-latm"},
+            {".m4b", "audio/mp4a-latm"},
+            {".m4p", "audio/mp4a-latm"},
+            {".m4u", "video/vnd.mpegurl"},
+            {".m4v", "video/x-m4v"},
+            {".mov", "video/quicktime"},
+            {".mp2", "audio/x-mpeg"},
+            {".mp3", "audio/x-mpeg"},
+            {".mp4", "video/mp4"},
+            {".mpc", "application/vnd.mpohun.certificate"},
+            {".mpe", "video/mpeg"},
+            {".mpeg", "video/mpeg"},
+            {".mpg", "video/mpeg"},
+            {".mpg4", "video/mp4"},
+            {".mpga", "audio/mpeg"},
+            {".msg", "application/vnd.ms-outlook"},
+            {".ogg", "audio/ogg"},
+            {".pdf", "application/pdf"},
+            {".png", "image/png"},
+            {".pps", "application/vnd.ms-powerpoint"},
+            {".ppt", "application/vnd.ms-powerpoint"},
+            {".pptx",
+                    "application/vnd.openxmlformats-officedocument.presentationml.presentation"},
+            {".prop", "text/plain"}, {".rc", "text/plain"},
+            {".rmvb", "audio/x-pn-realaudio"}, {".rtf", "application/rtf"},
+            {".sh", "text/plain"}, {".tar", "application/x-tar"},
+            {".tgz", "application/x-compressed"}, {".txt", "text/plain"},
+            {".wav", "audio/x-wav"}, {".wma", "audio/x-ms-wma"},
+            {".wmv", "audio/x-ms-wmv"},
+            {".wps", "application/vnd.ms-works"}, {".xml", "text/plain"},
+            {".z", "application/x-compress"},
+            {".zip", "application/x-zip-compressed"}, {"", "*/*"}};
 
     /**
      * 判断文件类型 audio:.amr,.m4a,.mp3,.mid,.xmf,.ogg,.wav,.3gpp,.3ga,.wma
@@ -771,6 +775,18 @@ public final class FileUtil {
         }
     }
 
+    public static void saveBitmap(Bitmap b, String filePath) {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(filePath);
+            b.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            LogHelper.d("保存文件识别");
+        }
+    }
+
     /**
      * 获取文件的字节
      *
@@ -799,8 +815,10 @@ public final class FileUtil {
         }
         return null;
     }
+
     /**
      * 格式化文件大小
+     *
      * @param fileS
      * @return
      */
@@ -814,13 +832,14 @@ public final class FileUtil {
         } else if (fileS < 1073741824) {
             fileSizeString = df.format((double) fileS / 1048576) + "M";
         } else {
-            fileSizeString = df.format((double) fileS / 1073741824) +"G";
+            fileSizeString = df.format((double) fileS / 1073741824) + "G";
         }
         return fileSizeString;
     }
 
     /**
      * 获取文件大小 单位为字节
+     *
      * @param f
      * @return
      * @throws Exception
@@ -840,10 +859,11 @@ public final class FileUtil {
 
     /**
      * 格式化返回文件大小
+     *
      * @param f
      * @return
      */
-    public static String getFormatFileSizeForFile(File f){
+    public static String getFormatFileSizeForFile(File f) {
         try {
             return formetFileSize(getFileSizes(f));
         } catch (Exception e) {
@@ -855,10 +875,11 @@ public final class FileUtil {
 
     /**
      * 检测是否有文件， 如果有则删除。
+     *
      * @param file
      */
-    public static void checkAndDelFile(File file){
-        if(file.exists()){
+    public static void checkAndDelFile(File file) {
+        if (file.exists()) {
             file.delete();//删除文件
         }
     }
