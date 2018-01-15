@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lanshifu.myapp_3.network.progress.body;
+package com.lanshifu.baselibrary.network.progress.body;
 
 import android.os.Parcel;
 import android.os.Parcelable;

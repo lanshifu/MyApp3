@@ -1,13 +1,13 @@
 
-package com.lanshifu.myapp_3.network.progress.body;
+package com.lanshifu.baselibrary.network.progress.body;
 
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 
 
-import com.lanshifu.myapp_3.network.progress.ProgressListener;
-import com.lanshifu.myapp_3.network.progress.ProgressManager;
+import com.lanshifu.baselibrary.network.progress.ProgressListener;
+import com.lanshifu.baselibrary.network.progress.ProgressManager;
 
 import java.io.IOException;
 import java.util.List;

@@ -17,6 +17,7 @@ import com.jaredrummler.android.shell.CommandResult;
 import com.jaredrummler.android.shell.Shell;
 import com.lanshifu.baselibrary.basemvp.BasePresenter;
 import com.lanshifu.baselibrary.log.LogHelper;
+import com.lanshifu.baselibrary.network.RxScheduler;
 import com.lanshifu.baselibrary.utils.FileUtil;
 import com.lanshifu.baselibrary.utils.StorageUtil;
 import com.lanshifu.baselibrary.utils.ToastUtil;
@@ -24,7 +25,6 @@ import com.lanshifu.myapp_3.MainApplication;
 import com.lanshifu.myapp_3.mvp.MainView;
 import com.lanshifu.myapp_3.network.MyObserver;
 import com.lanshifu.myapp_3.network.RetrofitHelper;
-import com.lanshifu.myapp_3.network.RxScheduler;
 
 import java.io.File;
 import java.io.IOException;

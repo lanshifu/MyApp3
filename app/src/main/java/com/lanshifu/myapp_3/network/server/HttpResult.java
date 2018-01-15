@@ -1,4 +1,4 @@
-package com.lanshifu.myapp_3.network;
+package com.lanshifu.myapp_3.network.server;
 
 /**
  * 返回码 统一处理

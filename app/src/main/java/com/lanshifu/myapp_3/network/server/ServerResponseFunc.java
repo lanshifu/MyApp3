@@ -1,4 +1,4 @@
-package com.lanshifu.myapp_3.network;
+package com.lanshifu.myapp_3.network.server;
 
 import io.reactivex.functions.Function;
 

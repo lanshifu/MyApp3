@@ -1,4 +1,4 @@
-package com.lanshifu.myapp_3.network;
+package com.lanshifu.myapp_3.network.server;
 
 /**
  * 服务端状态码不对时抛出此异常，MyObserver的onError中处理

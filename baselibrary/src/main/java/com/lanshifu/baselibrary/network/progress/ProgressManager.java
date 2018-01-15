@@ -1,4 +1,4 @@
-package com.lanshifu.myapp_3.network.progress;
+package com.lanshifu.baselibrary.network.progress;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -8,8 +8,8 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.text.TextUtils;
 
-import com.lanshifu.myapp_3.network.progress.body.ProgressRequestBody;
-import com.lanshifu.myapp_3.network.progress.body.ProgressResponseBody;
+import com.lanshifu.baselibrary.network.progress.body.ProgressRequestBody;
+import com.lanshifu.baselibrary.network.progress.body.ProgressResponseBody;
 
 import java.io.IOException;
 import java.lang.ref.ReferenceQueue;

@@ -1,4 +1,4 @@
-package com.lanshifu.myapp_3.network;
+package com.lanshifu.baselibrary.network;
 
 import org.reactivestreams.Publisher;
 
@@ -53,7 +53,7 @@ public class RxScheduler {
                 @Override
                 public Publisher<T> apply(@NonNull Flowable<T> upstream) {
                     return upstream
-                            .subscribeOn(Schedulers.from(RxScheduler.fixedThreadPool))
+                            .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread());
                 }
 

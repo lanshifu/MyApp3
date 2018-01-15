@@ -1,7 +1,7 @@
-package com.lanshifu.myapp_3.network.progress;
+package com.lanshifu.baselibrary.network.progress;
 
 
-import com.lanshifu.myapp_3.network.progress.body.ProgressInfo;
+import com.lanshifu.baselibrary.network.progress.body.ProgressInfo;
 
 /**
  * Created by lanxiaobin on 2017/10/25.

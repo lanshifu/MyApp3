@@ -2,12 +2,13 @@ package com.lanshifu.myapp_3.network;
 
 import com.lanshifu.baselibrary.BaseApplication;
 import com.lanshifu.baselibrary.log.LogHelper;
+import com.lanshifu.baselibrary.network.BaseRetrofitHelper;
+import com.lanshifu.baselibrary.network.progress.ProgressManager;
 import com.lanshifu.baselibrary.utils.SystemUtil;
 import com.lanshifu.myapp_3.Config;
 import com.lanshifu.myapp_3.MainApplication;
 import com.lanshifu.myapp_3.network.api.ApiConstant;
 import com.lanshifu.myapp_3.network.api.DefaultApi;
-import com.lanshifu.myapp_3.network.progress.ProgressManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,16 +21,13 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 网络请求的单例
  * Created by lanxiaobin on 2017/9/6.
  */
 
-public class RetrofitHelper {
+public class RetrofitHelper extends BaseRetrofitHelper {
 
 
     private static RetrofitHelper mRetrofitHelper = null;
@@ -44,6 +42,10 @@ public class RetrofitHelper {
      */
     private static OkHttpClient mNoHeaderOkHttpClient;
 
+    static {
+        initOkHttp();
+    }
+
     private RetrofitHelper() {
     }
 
@@ -56,18 +58,13 @@ public class RetrofitHelper {
         return mRetrofitHelper;
     }
 
-    static {
-        initOkHttp();
-    }
-
-
     private static void initOkHttp() {
         HttpLoggingInterceptor loggingInterceptor = null;
         if (Config.DEBUG) {
             loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                 @Override
                 public void log(String message) {
-                    LogHelper.d("[okhttp] "+message);
+                    LogHelper.d("[okhttp] " + message);
                 }
             });
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -82,7 +79,7 @@ public class RetrofitHelper {
             //ProgressManager 里面提供文件上传下载进度监听
             mDefaultOkHttpClient = ProgressManager.getInstance().with(new OkHttpClient.Builder())
                     .addInterceptor(loggingInterceptor)
-                    .addInterceptor(new headerInterceptor())
+//                    .addInterceptor(new headerInterceptor())
                     .cache(cache)
                     .retryOnConnectionFailure(true) //错误重连
                     .connectTimeout(30, TimeUnit.SECONDS)
@@ -91,18 +88,17 @@ public class RetrofitHelper {
                     .build();
         }
 
-        if(mNoHeaderOkHttpClient == null){
-            mNoHeaderOkHttpClient = new OkHttpClient.Builder()
-                    .addInterceptor(loggingInterceptor)
-                    .retryOnConnectionFailure(true) //错误重连
-                    .connectTimeout(30, TimeUnit.SECONDS)
-                    .writeTimeout(20, TimeUnit.SECONDS)
-                    .readTimeout(20, TimeUnit.SECONDS)
-                    .build();
-        }
+//        if(mNoHeaderOkHttpClient == null){
+//            mNoHeaderOkHttpClient = new OkHttpClient.Builder()
+//                    .addInterceptor(loggingInterceptor)
+//                    .retryOnConnectionFailure(true) //错误重连
+//                    .connectTimeout(30, TimeUnit.SECONDS)
+//                    .writeTimeout(20, TimeUnit.SECONDS)
+//                    .readTimeout(20, TimeUnit.SECONDS)
+//                    .build();
+//        }
 
     }
-
 
     /**
      * 统一添加请求头
@@ -163,49 +159,12 @@ public class RetrofitHelper {
 
 
     /**
-     * 根据传入的baseUrl，和api创建retrofit
-     */
-    private <T> T createApi(Class<T> clazz, String baseUrl) {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(mDefaultOkHttpClient)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit.create(clazz);
-    }
-
-
-    /**
-     * 根据传入的baseUrl，和api创建retrofit
-     * @param clazz
-     * @param baseUrl
-     * @param okHttpClient 自定义okHttpClient
-     * @param <T>
-     * @return
-     */
-    private <T> T createApi(Class<T> clazz, String baseUrl,OkHttpClient okHttpClient) {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(okHttpClient)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit.create(clazz);
-    }
-
-
-    /**
      * 默认请求
      *
      * @return
      */
     public DefaultApi getDefaultApi() {
-        return createApi(DefaultApi.class, ApiConstant.URL_DEFAULT);
+        return createApi(DefaultApi.class, ApiConstant.URL_DEFAULT, mDefaultOkHttpClient);
     }
 
 

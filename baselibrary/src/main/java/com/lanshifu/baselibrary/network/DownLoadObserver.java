@@ -1,11 +1,11 @@
-package com.lanshifu.myapp_3.network;
+package com.lanshifu.baselibrary.network;
 
 
 import com.lanshifu.baselibrary.log.LogHelper;
+import com.lanshifu.baselibrary.network.progress.ProgressListener;
+import com.lanshifu.baselibrary.network.progress.ProgressManager;
+import com.lanshifu.baselibrary.network.progress.body.ProgressInfo;
 import com.lanshifu.baselibrary.utils.FileUtil;
-import com.lanshifu.myapp_3.network.progress.ProgressListener;
-import com.lanshifu.myapp_3.network.progress.ProgressManager;
-import com.lanshifu.myapp_3.network.progress.body.ProgressInfo;
 
 import java.io.File;
 import java.io.FileOutputStream;
