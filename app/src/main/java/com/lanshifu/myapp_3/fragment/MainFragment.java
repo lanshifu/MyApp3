@@ -4,7 +4,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lanshifu.baselibrary.base.BaseFragment;
 import com.lanshifu.myapp_3.R;
 
@@ -41,11 +43,11 @@ public class MainFragment extends BaseFragment {
 
             @Override
             public Fragment getItem(int position) {
-                if (position == 1) {
+                if (position == 0) {
                     return new HomeFragment();
-                } else if (position == 2) {
+                } else if (position == 1) {
                     return new DefaultFragment();
-                } else if (position == 3) {
+                } else if (position == 2) {
                     return new DefaultFragment();
                 }
                 return new DefaultFragment();
@@ -67,6 +69,7 @@ public class MainFragment extends BaseFragment {
         mTabLayout.getTabAt(1).setIcon(R.drawable.tab_around_selector);
         mTabLayout.getTabAt(2).setIcon(R.drawable.tab_more_selector);
         mTabLayout.getTabAt(3).setIcon(R.drawable.tab_me_selector);
+
 
     }
 

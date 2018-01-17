@@ -3,7 +3,7 @@ apply plugin: 'com.didi.virtualapk.host'
 
 android {
 
-    compileSdkVersion 27
+    compileSdkVersion 26
     buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.lanshifu.myapp_3"
@@ -35,7 +35,7 @@ dependencies {
     //    //数据库
     //    compile 'org.litepal.android:core:1.6.0'
     //    //adapter
-    //    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+        compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     //    //下拉刷新
     //    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.2-alpha-7'
     //    //知乎开源图片选择库
@@ -46,7 +46,13 @@ dependencies {
     //    compile 'com.commit451:PhotoView:1.2.4'
     //didi插件
     compile 'com.didi.virtualapk:core:0.9.0'
+
     //悬浮窗 https://github.com/yhaolpz/FloatWindow
     compile 'com.github.yhaolpz:FloatWindow:1.0.8'
-    compile files('src/main/lib/ocr-sdk.jar')
+
+    //服务器  https://github.com/koush/AndroidAsync
+    compile 'com.koushikdutta.async:androidasync:2.+'
+
+    //谷歌流布局  https://github.com/google/flexbox-layout
+    compile 'com.google.android:flexbox:0.3.2'
 }

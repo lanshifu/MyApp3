@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<com.google.android.flexbox.FlexboxLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:flexWrap="wrap"
+    app:alignItems="stretch"
+    app:alignContent="stretch" >
 
-    <Button
-        android:id="@+id/bt_flow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="关闭悬浮窗"/>
+    <TextView
+        android:id="@+id/bt_server"
+        android:text="mini服务器"
+        style="@style/style_textview_tag"/>
 
-    <ImageView
-        android:id="@+id/iv_screen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+  <TextView
+        android:id="@+id/bt_box"
+        android:text="表格"
+        style="@style/style_textview_tag"/>
+
+
+</com.google.android.flexbox.FlexboxLayout>

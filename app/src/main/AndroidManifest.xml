@@ -45,6 +45,8 @@
                 android:resource="@xml/accessibility"/>
         </service>
 
+        <activity android:name=".activity.WebServerActivity"/>
+
     </application>
 
 </manifest>

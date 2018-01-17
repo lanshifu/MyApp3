@@ -1,24 +1,13 @@
 package com.lanshifu.myapp_3.fragment;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.lanshifu.baselibrary.base.BaseFragment;
-import com.lanshifu.myapp_3.MainApplication;
 import com.lanshifu.myapp_3.R;
-import com.yhao.floatwindow.FloatWindow;
+import com.lanshifu.myapp_3.activity.WebServerActivity;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -27,8 +16,6 @@ import butterknife.OnClick;
 
 public class HomeFragment extends BaseFragment {
     private static final int MY_PERMISSIONS_REQUEST_SD = 10;
-    @Bind(R.id.iv_screen)
-    ImageView mIvScreen;
 
     @Override
     protected int getLayoutId() {
@@ -37,32 +24,19 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        checkSdPermission();
 
     }
 
 
-    private void checkSdPermission() {
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    MY_PERMISSIONS_REQUEST_SD);
+    @OnClick({R.id.bt_server, R.id.bt_box})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.bt_server:
+                startActivity(WebServerActivity.class);
 
+                break;
+            case R.id.bt_box:
+                break;
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-
-    }
-
-
-    @OnClick(R.id.bt_flow)
-    public void onViewClicked() {
-        FloatWindow.destroy();
     }
 }

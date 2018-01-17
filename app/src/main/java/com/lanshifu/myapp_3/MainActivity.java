@@ -11,15 +11,14 @@ import android.widget.TextView;
 
 import com.didi.virtualapk.PluginManager;
 import com.lanshifu.baselibrary.base.BaseActivity;
-import com.lanshifu.myapp_3.mvp.MainView;
 import com.lanshifu.myapp_3.mvp.presenter.MainPresenter;
+import com.lanshifu.myapp_3.mvp.view.MainView;
 import com.lanshifu.myapp_3.network.MyObserver;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.yhao.floatwindow.FloatWindow;
 import com.yhao.floatwindow.Screen;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
 
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
@@ -53,7 +52,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
     private void checkPermission() {
         new RxPermissions(this)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .request(Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(new MyObserver<Boolean>() {
                     @Override
                     public void _onNext(Boolean aBoolean) {
@@ -175,8 +175,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         view.findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTv_result.setText("正在查询...");
-                mPresenter.getScreenAndParseText();
+                mTv_result.setText("点击了");
             }
         });
 
@@ -208,11 +207,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     @Override
     public void heroResult(String result, long time) {
         mTv_result.setText(result);
-        mTv_result.append("\n耗时："+time);
+        mTv_result.append("\n耗时：" + time);
     }
 
     @Override
     public void heroError(String text) {
-        mTv_result.setText("出错了："+text);
+        mTv_result.setText("出错了：" + text);
     }
 }

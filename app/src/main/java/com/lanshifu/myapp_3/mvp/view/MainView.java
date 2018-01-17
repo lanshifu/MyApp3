@@ -1,4 +1,4 @@
-package com.lanshifu.myapp_3.mvp;
+package com.lanshifu.myapp_3.mvp.view;
 
 import com.lanshifu.baselibrary.basemvp.BaseView;
 
