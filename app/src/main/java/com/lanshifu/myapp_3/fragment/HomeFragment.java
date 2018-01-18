@@ -1,13 +1,11 @@
 package com.lanshifu.myapp_3.fragment;
 
 import android.view.View;
-import android.widget.ImageView;
 
 import com.lanshifu.baselibrary.base.BaseFragment;
 import com.lanshifu.myapp_3.R;
 import com.lanshifu.myapp_3.activity.WebServerActivity;
 
-import butterknife.Bind;
 import butterknife.OnClick;
 
 /**

@@ -1,25 +1,20 @@
 package com.lanshifu.myapp_3.activity;
 
-import android.os.Environment;
+import android.content.Intent;
+import android.view.View;
 import android.widget.TextView;
 
 import com.koushikdutta.async.AsyncServer;
 import com.koushikdutta.async.http.server.AsyncHttpServer;
-import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
-import com.koushikdutta.async.http.server.AsyncHttpServerResponse;
-import com.koushikdutta.async.http.server.HttpServerRequestCallback;
 import com.lanshifu.baselibrary.base.BaseActivity;
 import com.lanshifu.baselibrary.log.LogHelper;
+import com.lanshifu.myapp_3.MainApplication;
 import com.lanshifu.myapp_3.R;
+import com.lanshifu.myapp_3.server.MiniService;
+import com.yhao.floatwindow.FloatWindow;
+import com.yhao.floatwindow.MoveType;
+import com.yhao.floatwindow.Screen;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -27,7 +22,6 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 
 /**
  * Created by lanxiaobin on 2018/1/17.
@@ -41,6 +35,7 @@ public class WebServerActivity extends BaseActivity {
     private static final int PORT = 12345;
     private AsyncHttpServer server = new AsyncHttpServer();
     private AsyncServer mAsyncServer = new AsyncServer();
+    private Intent mServiceIntent;
 
     @Override
     protected int getLayoutId() {
@@ -50,89 +45,16 @@ public class WebServerActivity extends BaseActivity {
     @Override
     protected void initView() {
 
+        setTitleText("mini服务器");
         mTvIp.setText(getHostIP());
+
+        startMiniServer();
     }
 
-
-    @OnClick(R.id.btn_start_server)
-    public void onViewClicked() {
-
-        server.get("/", new HttpServerRequestCallback() {
-            @Override
-            public void onRequest(AsyncHttpServerRequest request, AsyncHttpServerResponse response) {
-                try {
-                    response.send(getIndexContent());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    response.code(500).end();
-                }
-            }
-        });
-
-        server.get("/files", new HttpServerRequestCallback() {
-            @Override
-            public void onRequest(AsyncHttpServerRequest request, AsyncHttpServerResponse response) {
-                JSONArray array = new JSONArray();
-                File dir = new File(Environment.getExternalStorageDirectory().getPath());
-                String[] fileNames = dir.list();
-                if (fileNames != null) {
-                    for (String fileName : fileNames) {
-                        File file = new File(dir, fileName);
-                        if (file.exists() && file.isFile() && file.getName().endsWith(".mp4")) {
-                            try {
-                                JSONObject jsonObject = new JSONObject();
-                                jsonObject.put("name", fileName);
-                                jsonObject.put("path", file.getAbsolutePath());
-                                array.put(jsonObject);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-                response.send(array.toString());
-            }
-        });
-
-        server.listen(mAsyncServer, PORT);
+    private void startMiniServer() {
+        mServiceIntent = new Intent(this, MiniService.class);
+        startService(mServiceIntent);
     }
-
-    private String getIndexContent() throws IOException {
-        BufferedInputStream bInputStream = null;
-        try {
-            bInputStream = new BufferedInputStream(getAssets().open("index.html"));
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            int len = 0;
-            byte[] tmp = new byte[10240];
-            while ((len = bInputStream.read(tmp)) > 0) {
-                baos.write(tmp, 0, len);
-            }
-            return new String(baos.toByteArray(), "utf-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            if (bInputStream != null) {
-                try {
-                    bInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (server != null) {
-            server.stop();
-        }
-        if (mAsyncServer != null) {
-            mAsyncServer.stop();
-        }
-    }
-
 
     /**
      * 获取ip地址
@@ -167,5 +89,6 @@ public class WebServerActivity extends BaseActivity {
         return hostIp + ":" + PORT;
 
     }
+
 
 }
