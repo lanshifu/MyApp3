@@ -1,9 +1,12 @@
 package com.lanshifu.myapp_3.network.api;
 
+import com.lanshifu.myapp_3.model.WeatherInfo;
+
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -49,4 +52,7 @@ public interface DefaultApi {
             @Query("wd") String wd);
 
 
+    @GET("http://www.weather.com.cn/data/cityinfo/{city}.html")
+    Observable<WeatherInfo>getWheather(
+            @Path("city")  String city);
 }

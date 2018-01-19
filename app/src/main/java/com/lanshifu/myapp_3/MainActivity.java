@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         hideBackIcon();
         mPresenter.loadPlugin(this);
         mPresenter.checkRootPermission();
+        mPresenter.getWeather();
         checkPermission();
 
     }

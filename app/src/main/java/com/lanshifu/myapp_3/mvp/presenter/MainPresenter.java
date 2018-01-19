@@ -9,8 +9,10 @@ import com.lanshifu.baselibrary.basemvp.BasePresenter;
 import com.lanshifu.baselibrary.log.LogHelper;
 import com.lanshifu.baselibrary.network.RxScheduler;
 import com.lanshifu.baselibrary.utils.ToastUtil;
+import com.lanshifu.myapp_3.model.WeatherInfo;
 import com.lanshifu.myapp_3.mvp.view.MainView;
 import com.lanshifu.myapp_3.network.MyObserver;
+import com.lanshifu.myapp_3.network.RetrofitHelper;
 
 import java.io.File;
 import java.util.HashMap;
@@ -76,4 +78,23 @@ public class MainPresenter extends BasePresenter<MainView> {
                 });
     }
 
+
+    public void getWeather(){
+        RetrofitHelper.getInstance().getDefaultApi()
+                .getWheather("101280101")
+                .compose(RxScheduler.<WeatherInfo>io_main())
+                .subscribe(new MyObserver<WeatherInfo>() {
+                    @Override
+                    public void _onNext(WeatherInfo weatherInfo) {
+                        LogHelper.d("lxb ->" +weatherInfo.toString());
+                        ToastUtil.showLongToast(weatherInfo.toString());
+                    }
+
+                    @Override
+                    public void _onError(String e) {
+                        LogHelper.e("lxb ->"+e);
+                    }
+                });
+
+    }
 }
