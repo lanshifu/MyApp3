@@ -38,7 +38,7 @@ dependencies {
     //    //adapter
         compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     //    //下拉刷新
-    //    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.2-alpha-7'
+        compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.2-alpha-7'
     //    //知乎开源图片选择库
     //    compile 'com.zhihu.android:matisse:0.5.0-alpha4'
     //    //图片压缩

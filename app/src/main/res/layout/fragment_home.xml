@@ -14,8 +14,8 @@
         style="@style/style_textview_tag"/>
 
   <TextView
-        android:id="@+id/bt_box"
-        android:text="表格"
+        android:id="@+id/bt_book"
+        android:text="看文章"
         style="@style/style_textview_tag"/>
 
 

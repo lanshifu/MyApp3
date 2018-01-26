@@ -7,8 +7,9 @@ package com.lanshifu.myapp_3.network.api;
 public class ApiConstant {
 
     //默认服务器地址
-    public static final String URL_DEFAULT = "http://127.0.0.1";
+//    public static final String URL_DEFAULT = "http://192.168.31.85";
+    public static final String URL_DEFAULT = "http://192.168.31.85:9000/";
 
-    public static final String URL_BAIDU = "http://www.baidu.com";
+    public static final String URL_BAIDU = "http://www.baidu.com/";
 
 }

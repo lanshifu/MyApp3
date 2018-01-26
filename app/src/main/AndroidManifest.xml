@@ -47,6 +47,7 @@
         <service android:name="com.lanshifu.myapp_3.server.MiniService"/>
 
         <activity android:name=".activity.WebServerActivity"/>
+        <activity android:name=".activity.ArticleListActivity"/>
 
     </application>
 

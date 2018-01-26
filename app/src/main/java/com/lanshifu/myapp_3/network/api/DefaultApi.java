@@ -1,6 +1,9 @@
 package com.lanshifu.myapp_3.network.api;
 
+import com.lanshifu.myapp_3.model.Article;
 import com.lanshifu.myapp_3.model.WeatherInfo;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -55,4 +58,12 @@ public interface DefaultApi {
     @GET("http://www.weather.com.cn/data/cityinfo/{city}.html")
     Observable<WeatherInfo>getWheather(
             @Path("city")  String city);
+
+
+    @GET("/api/articles")
+    Observable<Article> getArticles(
+            @Query("current_page") int current_page,
+            @Query("page_count") int pager_count
+
+    );
 }

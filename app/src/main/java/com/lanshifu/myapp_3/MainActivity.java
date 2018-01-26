@@ -58,12 +58,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
                 .subscribe(new MyObserver<Boolean>() {
                     @Override
                     public void _onNext(Boolean aBoolean) {
+                        showShortToast("权限"+aBoolean);
 
                     }
 
                     @Override
                     public void _onError(String e) {
-
+                        showShortToast("权限失败"+e);
                     }
                 });
     }

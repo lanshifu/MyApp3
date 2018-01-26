@@ -31,6 +31,7 @@ public class BaseApplication extends Application {
 
         LogHandler logHandler = new LogHandler(this);
         logHandler.setName("LogHandler");
+        logHandler.start();
 
         ToastUtil.init(context);
         StorageUtil.init(context);

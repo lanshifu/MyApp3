@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.lanshifu.baselibrary.base.BaseFragment;
 import com.lanshifu.myapp_3.R;
+import com.lanshifu.myapp_3.activity.ArticleListActivity;
 import com.lanshifu.myapp_3.activity.WebServerActivity;
 
 import butterknife.OnClick;
@@ -26,14 +27,15 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.bt_server, R.id.bt_box})
+    @OnClick({R.id.bt_server, R.id.bt_book})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_server:
                 startActivity(WebServerActivity.class);
 
                 break;
-            case R.id.bt_box:
+            case R.id.bt_book:
+                startActivity(ArticleListActivity.class);
                 break;
         }
     }
