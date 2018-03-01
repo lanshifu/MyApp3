@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.MemoryCategory;
 import com.didi.virtualapk.PluginManager;
 import com.lanshifu.baselibrary.base.BaseActivity;
 import com.lanshifu.myapp_3.mvp.presenter.MainPresenter;
@@ -21,7 +23,7 @@ import com.yhao.floatwindow.Screen;
 import java.lang.reflect.Method;
 
 
-public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
+    public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
 
     private static final String PLUGIN_PACKAGE = "com.lanshifu.imageplugin";
     private static final String PLUGIN_MAIN = "com.lanshifu.imageplugin.MainActivity_plugin";
@@ -46,9 +48,16 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         hideBackIcon();
         mPresenter.loadPlugin(this);
         mPresenter.checkRootPermission();
-        mPresenter.getWeather();
+//        mPresenter.getWeather();
         checkPermission();
+        showShortToast(getCount() +"");
 
+        Glide.get(this).setMemoryCategory(MemoryCategory.LOW);
+
+    }
+
+    private int getCount(){
+        return 1;
     }
 
     private void checkPermission() {

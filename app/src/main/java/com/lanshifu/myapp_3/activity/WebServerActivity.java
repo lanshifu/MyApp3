@@ -33,8 +33,6 @@ public class WebServerActivity extends BaseActivity {
     TextView mTvIp;
 
     private static final int PORT = 12345;
-    private AsyncHttpServer server = new AsyncHttpServer();
-    private AsyncServer mAsyncServer = new AsyncServer();
     private Intent mServiceIntent;
 
     @Override
@@ -47,7 +45,6 @@ public class WebServerActivity extends BaseActivity {
 
         setTitleText("mini服务器");
         mTvIp.setText(getHostIP());
-
         startMiniServer();
     }
 

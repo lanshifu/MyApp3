@@ -6,6 +6,7 @@ import com.lanshifu.baselibrary.base.BaseFragment;
 import com.lanshifu.myapp_3.R;
 import com.lanshifu.myapp_3.activity.ArticleListActivity;
 import com.lanshifu.myapp_3.activity.WebServerActivity;
+import com.lanshifu.myapp_3.activity.WifiP2PActivity;
 
 import butterknife.OnClick;
 
@@ -27,7 +28,7 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.bt_server, R.id.bt_book})
+    @OnClick({R.id.bt_server, R.id.bt_book, R.id.bt_wifip2p})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_server:
@@ -36,6 +37,10 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.bt_book:
                 startActivity(ArticleListActivity.class);
+                break;
+
+            case R.id.bt_wifip2p:
+                startActivity(WifiP2PActivity.class);
                 break;
         }
     }

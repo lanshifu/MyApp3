@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application
         android:name=".MainApplication"
@@ -26,6 +28,10 @@
         <activity
             android:name="com.lanshifu.baselibrary.crash.DefaultErrorActivity"
             android:process=":crash_activity" />
+
+        <activity android:name=".activity.WifiP2PActivity"/>
+        <activity android:name=".activity.SendFileActivity"/>
+        <activity android:name=".activity.ReceiveFileActivity"/>
 
         <provider
             android:name="com.lanshifu.baselibrary.crash.CaocInitProvider"

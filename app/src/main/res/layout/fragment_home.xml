@@ -4,19 +4,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:flexWrap="wrap"
+    app:alignContent="flex_start"
     app:alignItems="flex_start"
-    app:alignContent="flex_start" >
+    app:flexWrap="wrap">
 
     <TextView
         android:id="@+id/bt_server"
-        android:text="mini服务器"
-        style="@style/style_textview_tag"/>
+        style="@style/style_textview_tag"
+        android:text="mini服务器"/>
 
-  <TextView
+    <TextView
         android:id="@+id/bt_book"
-        android:text="看文章"
-        style="@style/style_textview_tag"/>
+        style="@style/style_textview_tag"
+        android:text="看文章"/>
+
+    <TextView
+        android:id="@+id/bt_wifip2p"
+        style="@style/style_textview_tag"
+        android:text="wifip2p"/>
 
 
 </com.google.android.flexbox.FlexboxLayout>

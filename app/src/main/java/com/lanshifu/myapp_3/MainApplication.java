@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.didi.virtualapk.PluginManager;
 import com.lanshifu.baselibrary.BaseApplication;
+import com.lanshifu.myapp_3.dbdemo.DbManager;
 
 /**
  * Created by lanxiaobin on 2018/1/4.
@@ -25,5 +26,6 @@ public class MainApplication extends BaseApplication{
         long start = System.currentTimeMillis();
         PluginManager.getInstance(base).init();
         Log.d(TAG, "attachBaseContext: use time:" + (System.currentTimeMillis() - start));
+
     }
 }
